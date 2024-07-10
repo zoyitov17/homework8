@@ -1,47 +1,38 @@
-import React, { useState } from "react";
-import axios from "axios";
 
-const NewPost = ({ createPost }) => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [loading, setLoading] = useState(false);
+import React from "react";
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await createPost({ title, body }); // createPost funksiyasiga title va body ni yuborish
-      setTitle("");
-      setBody("");
-    } catch (error) {
-      console.error("Post yaratishda xatolik:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const NewPost = ({
+  handleSubmit,
+  postTitle,
+  setPostTitle,
+  postBody,
+  setPostBody,
+  loading,
+}) => {
   return (
-    <div>
-      <h2>Yangi Post Yaratish</h2>
-      <form onSubmit={handleSubmit}>
+    <main className="NewPost">
+      <h2>New Post</h2>
+      <form className="newPostForm" onSubmit={handleSubmit}>
+        <label htmlFor="postTitle">Title:</label>
         <input
+          id="postTitle"
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Sarlavha"
           required
+          value={postTitle}
+          onChange={(e) => setPostTitle(e.target.value)}
         />
+        <label htmlFor="postBody">Post:</label>
         <textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          placeholder="Matn"
+          id="postBody"
           required
-        ></textarea>
+          value={postBody}
+          onChange={(e) => setPostBody(e.target.value)}
+        />
         <button type="submit" disabled={loading}>
-          {loading ? "Yaratilmoqda..." : "Postni Yaratish"}
+          {loading ? "Is being sent..." : "Submit"}
         </button>
       </form>
-    </div>
+    </main>
   );
 };
 
