@@ -20,10 +20,10 @@ const PostPage = ({ posts, handleDelete, loading }) => {
           )}
           {!post && (
             <>
-              <h2>Maqola topilmadi</h2>
-              <p>Ummoq...</p>
+              <h2>Article not found</h2>
+              <p>Disapointing...</p>
               <p>
-                <Link to="/">Bosh sahifaga o'ting</Link>
+                <Link to="/">Go to the home page</Link>
               </p>
             </>
           )}
